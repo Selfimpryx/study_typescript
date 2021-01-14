@@ -12,8 +12,8 @@ let decLiteral: number = 6
 
 //字符串
 //和js一样 ，使用" 或者是 ' 表示字符串
-let name:string = 'bob'
-name = 'smith'
+let name1:string = 'bob'
+name1 = 'smith'
 console.log(name) //smith
 //还可以使用模板字符串 可以定义多行文本和内嵌表达式 和 es6类似 使用``反引号包围 使用 ${} 嵌入表达式
 let age: number = 37
@@ -26,3 +26,51 @@ console.log(myAge) //I will be 38 years old next month
 let list1: number[] = [1,2,3]
 //第二种 使用数组泛型
 let list2: Array<number> = [4,5,6]
+// let list3:Array<number> = [1,2,'333']
+
+//元组 tuple
+//元组类型你可以表示一个已知元素数量和类型的数组，各元素的类型不必相同
+let tArr:[number,string]
+tArr = [1,'字符'] //ok
+// tArr = ['字符',222] error
+//访问一个已知索引的元素 会得到正确的类型
+// console.log(tArr[0].substr(1)) 'substr' does not exist on type 'number'
+// console.log(tArr[1].substr(1))
+// tArr[2] = '字符串2'
+// console.log(tArr)
+
+// tArr[3] = 222
+// tArr[4] = true
+// console.log(tArr)
+
+ 
+//枚举  enum
+//为一组数组赋予友好的名字
+enum Color {Red,Green,Blue}
+let c:Color = Color.Green
+console.log(c) //1
+// 默认 从0开始是元素的编号 也可以手动指定成员的数值
+enum Color2 {Red=2,Green=5,Blue}
+let c2:Color2 = Color2.Green
+console.log(c2) //5
+//枚举类型的便利就是你可以通过枚举的名字得到他的值  也可以由值得到他的名字
+let colorName: string = Color2[5]
+console.log(colorName) //Green
+
+//Any
+//不清楚类型的变量随便指定一个类型
+let notSure: any = 4
+notSure = '字符串' //ok
+notSure = false //ok
+//可以定义数组
+let aList:any[] = [1,'22',false] //ok
+let aList2: Array<any> = [true,'hga',777] //ok
+
+// void
+//与any相反 就是没有任何类型 比如一个函数没有返回值的时候就是void
+function warnUser():void{
+  console.log('this is warnUser message')
+}
+//声明一个void变量没用 只能为其赋值 null和undefined
+// let unuseable:void = '2222' Type '"2222"' is not assignable to type 'void'.
+let unuseable:void = null //ok
