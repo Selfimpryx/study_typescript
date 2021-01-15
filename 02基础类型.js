@@ -73,4 +73,43 @@ function warnUser() {
 }
 //声明一个void变量没用 只能为其赋值 null和undefined
 // let unuseable:void = '2222' Type '"2222"' is not assignable to type 'void'.
-var unuseable = null;
+var unuseable = null; //ok
+// null和undefined
+// null和undefined有他们各自的类型叫null和undefined 和void类似
+var u = undefined;
+var n = null;
+//默认情况下null和undefined是任何类型的子类型 可以赋值给任何类型
+var num = null; //ok
+var str = undefined; //ok
+//但是指定了--strictNullChecks标记(严格空校验) 就只能赋值给void和他们自己
+//Never
+/**
+ * 表示那些永不存在的值的类型 是那些总会抛出异常或者根本不会有返回值的函数表达式后箭头函数表达式的返回值类型
+ * 变量也可能是never类型  当他们被永不为真的类型保护所约束时
+ * 是任何类型的子类型 可以赋值给任何类型 没有类型是never的子类型 或者是可以赋值给never 即使是any也不行
+ */
+//返回never类型的函数
+function error(message) {
+    throw new Error(message);
+}
+// 推断的返回值类型为never
+function fail() {
+    return error("Something failed");
+}
+// Object
+//非原始类型  是除了 number string Boolean symbol null undefined 之外的类型
+/**
+ * any和object的区别
+ *    any可以给他赋值还可以调用上面的方法  但是object只能赋值，不能在他上面调用任意的方法
+ */
+// let notSure2:any = 4
+// notSure2.ifItExists() //ok
+// let prettySure: Object = 4;
+// prettySure.toFixed(); //Property 'toFixed' does not exist on type 'Object'.
+//类型断言
+//清楚一个实体的类型是什么的时候，通过类型断言告诉编译器 相信我
+// 两种形式
+var someValue = "this is a string";
+var strLength = someValue.length;
+var someValue2 = "this is a string";
+var strLength2 = someValue2.length;
